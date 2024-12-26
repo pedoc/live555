@@ -24,7 +24,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #include "MIKEY.hh"
 #endif
 
-class LIVEMEDIA_API SRTPCryptographicContext {
+class SRTPCryptographicContext {
 public:
   SRTPCryptographicContext(MIKEYState const& mikeyState);
   virtual ~SRTPCryptographicContext();
@@ -46,6 +46,8 @@ public:
 				    unsigned& outPacketSize);
   Boolean processOutgoingSRTCPPacket(u_int8_t* buffer, unsigned inPacketSize,
 				     unsigned& outPacketSize);
+
+  u_int32_t sendingROC() const;
 
 #ifndef NO_OPENSSL
 private:

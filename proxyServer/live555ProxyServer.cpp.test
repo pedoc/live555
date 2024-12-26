@@ -55,6 +55,14 @@ void usage() {
   exit(1);
 }
 
+//#####@@@@@
+RTSPServer* OurRtspServer;
+void smsDeleter(void* clientData) {
+  fprintf(stderr, "#####@@@@@ calling deleteServerMediaSession()\n");
+  OurRtspServer->deleteServerMediaSession((ServerMediaSession*)clientData);
+  fprintf(stderr, "#####@@@@@ called deleteServerMediaSession()\n");
+}
+//#####@@@@@
 int main(int argc, char** argv) {
   // Increase the maximum size of video frames that we can 'proxy' without truncation.
   // (Such frames are unreasonably large; the back-end servers should really not be sending frames this large!)
@@ -228,7 +236,12 @@ int main(int argc, char** argv) {
     *env << "RTSP stream, proxying the stream \"" << proxiedStreamURL << "\"\n";
     *env << "\tPlay this stream using the URL: " << proxyStreamURL << "\n";
     delete[] proxyStreamURL;
+    //#####@@@@@
+    OurRtspServer = rtspServer;
+    env->taskScheduler().scheduleDelayedTask(10000000, (TaskFunc*)smsDeleter, sms);
+    //#####@@@@@
   }
+
 
   if (proxyREGISTERRequests) {
     *env << "(We handle incoming \"REGISTER\" requests on port " << rtspServerPortNum << ")\n";

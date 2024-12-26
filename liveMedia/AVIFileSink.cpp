@@ -33,7 +33,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 ////////// AVISubsessionIOState ///////////
 // A structure used to represent the I/O state of each input 'subsession':
 
-class LIVEMEDIA_API SubsessionBuffer {
+class SubsessionBuffer {
 public:
   SubsessionBuffer(unsigned bufferSize)
     : fBufferSize(bufferSize) {
@@ -61,7 +61,7 @@ private:
   unsigned fBytesInUse;
 };
 
-class LIVEMEDIA_API AVISubsessionIOState {
+class AVISubsessionIOState {
 public:
   AVISubsessionIOState(AVIFileSink& sink, MediaSubsession& subsession);
   virtual ~AVISubsessionIOState();
@@ -102,7 +102,7 @@ private:
 
 ///////// AVIIndexRecord definition & implementation //////////
 
-class LIVEMEDIA_API AVIIndexRecord {
+class AVIIndexRecord {
 public:
   AVIIndexRecord(unsigned chunkId, unsigned flags, unsigned offset, unsigned size)
     : fNext(NULL), fChunkId(chunkId), fFlags(flags), fOffset(offset), fSize(size) {

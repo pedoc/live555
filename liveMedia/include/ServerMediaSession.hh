@@ -30,7 +30,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 
 class ServerMediaSubsession; // forward
 
-class LIVEMEDIA_API ServerMediaSession: public Medium {
+class ServerMediaSession: public Medium {
 public:
   static ServerMediaSession* createNew(UsageEnvironment& env,
 				       char const* streamName = NULL,
@@ -106,7 +106,7 @@ private:
 };
 
 
-class LIVEMEDIA_API ServerMediaSubsessionIterator {
+class ServerMediaSubsessionIterator {
 public:
   ServerMediaSubsessionIterator(ServerMediaSession& session);
   virtual ~ServerMediaSubsessionIterator();
@@ -120,7 +120,7 @@ private:
 };
 
 
-class LIVEMEDIA_API ServerMediaSubsession: public Medium {
+class ServerMediaSubsession: public Medium {
 public:
   unsigned trackNumber() const { return fTrackNumber; }
   char const* trackId();
@@ -187,6 +187,7 @@ protected: // we're a virtual base class
       // returns a string to be delete[]d
 
   ServerMediaSession* fParentSession;
+  u_int32_t fSRTP_ROC; // horrible hack for SRTP; when the ROC changes, regenerate the SDP
 
 private:
   friend class ServerMediaSession;

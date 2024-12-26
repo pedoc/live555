@@ -1,5 +1,2 @@
 .DS_Store
-build
-shared
-static
-linux
+/x64/
